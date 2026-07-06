@@ -93,18 +93,7 @@ else:
         }
     }
 
-# Supabase PostgreSQL direct connection (set DB_HOST=db.xxx.supabase.co and DB_PASSWORD)
-SUPABASE_DB_HOST = os.environ.get('SUPABASE_DB_HOST')
-if SUPABASE_DB_HOST:
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('SUPABASE_DB_NAME', 'postgres'),
-        'USER': os.environ.get('SUPABASE_DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('SUPABASE_DB_PASSWORD'),
-        'HOST': SUPABASE_DB_HOST,
-        'PORT': os.environ.get('SUPABASE_DB_PORT', '5432'),
-        'OPTIONS': {'sslmode': 'require'},
-    }
+
 
 TESTING = 'test' in sys.argv
 if TESTING:
