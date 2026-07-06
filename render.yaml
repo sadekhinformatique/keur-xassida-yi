@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: rh-manager-api
+    runtime: python
+    repo: https://github.com/sadekhinformatique/keur-xassida-yi
+    region: frankfurt
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt && cd backend && python manage.py migrate --run-syncdb
+    startCommand: cd backend && gunicorn config.wsgi --bind 0.0.0.0:$PORT --workers 4
+    healthCheckPath: /api/auth/users/
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: false
+      - key: DJANGO_ALLOWED_HOSTS
+        value: .onrender.com
+      - key: SUPABASE_URL
+        value: https://jfutcdemqkleebjicxpb.supabase.co
+      - key: SUPABASE_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE
+        sync: false
+      - key: SUPABASE_SECRET_KEY
+        sync: false
+      - key: SUPABASE_DB_HOST
+        value: db.jfutcdemqkleebjicxpb.supabase.co
+      - key: SUPABASE_DB_NAME
+        value: postgres
+      - key: SUPABASE_DB_USER
+        value: postgres
+      - key: SUPABASE_DB_PASSWORD
+        sync: false
+      - key: SUPABASE_DB_PORT
+        value: "5432"
+      - key: DB_HOST
+        value: db.jfutcdemqkleebjicxpb.supabase.co
+      - key: DB_NAME
+        value: postgres
+      - key: DB_USER
+        value: postgres
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_SSLMODE
+        value: require
