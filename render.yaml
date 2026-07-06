@@ -6,26 +6,20 @@ services:
     region: frankfurt
     plan: free
     dockerfilePath: ./Dockerfile
-    healthCheckPath: /api/auth/users/
+    healthCheckPath: /api/auth/me/
     envVars:
       - key: DJANGO_SECRET_KEY
         generateValue: true
       - key: DJANGO_DEBUG
-        value: false
+        value: "false"
       - key: USE_DAPHNE
         value: "true"
       - key: RENDER
         value: "true"
       - key: DJANGO_ALLOWED_HOSTS
-        value: .onrender.com
-      - key: SUPABASE_URL
-        value: https://jfutcdemqkleebjicxpb.supabase.co
-      - key: SUPABASE_KEY
-        sync: false
-      - key: SUPABASE_SERVICE_ROLE
-        sync: false
-      - key: SUPABASE_SECRET_KEY
-        sync: false
+        value: ".onrender.com,keur-xassida-yi.onrender.com"
+
+      # ── Supabase PostgreSQL ──────────────────────────────────────
       - key: DB_HOST
         value: aws-0-eu-west-1.pooler.supabase.com
       - key: DB_NAME
@@ -34,5 +28,23 @@ services:
         sync: false
       - key: DB_PASSWORD
         sync: false
+      - key: DB_PORT
+        value: "5432"
       - key: DB_SSLMODE
         value: require
+
+      # ── Supabase API ─────────────────────────────────────────────
+      - key: USE_SUPABASE
+        value: "true"
+      - key: SUPABASE_URL
+        value: https://jfutcdemqkleebjicxpb.supabase.co
+      - key: SUPABASE_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE
+        sync: false
+      - key: SUPABASE_SECRET_KEY
+        sync: false
+      - key: SUPABASE_JWT_SECRET
+        sync: false
+      - key: SUPABASE_JWKS_URL
+        value: https://jfutcdemqkleebjicxpb.supabase.co/auth/v1/.well-known/jwks.json
