@@ -5,19 +5,19 @@
 
 [build.environment]
   NODE_VERSION = "22"
-  NEXT_PUBLIC_API_URL = "https://ton-backend-deploye.com"
+  NEXT_PUBLIC_API_URL = "https://keur-xassida-yi.onrender.com"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
 [[redirects]]
   from = "/api/*"
-  to = "https://ton-backend-deploye.com/api/:splat"
+  to = "https://keur-xassida-yi.onrender.com/api/:splat"
   status = 200
   force = true
 
 [[redirects]]
   from = "/media/*"
-  to = "https://ton-backend-deploye.com/media/:splat"
+  to = "https://keur-xassida-yi.onrender.com/media/:splat"
   status = 200
   force = true
