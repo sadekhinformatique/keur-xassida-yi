@@ -1,12 +1,11 @@
 services:
   - type: web
     name: rh-manager-api
-    runtime: python
+    env: docker
     repo: https://github.com/sadekhinformatique/keur-xassida-yi
     region: frankfurt
     plan: free
-    buildCommand: pip install -r backend/requirements.txt && cd backend && python manage.py migrate
-    startCommand: cd backend && gunicorn config.wsgi --bind 0.0.0.0:$PORT --workers 4
+    dockerfilePath: ./Dockerfile
     healthCheckPath: /api/auth/users/
     envVars:
       - key: DJANGO_SECRET_KEY
