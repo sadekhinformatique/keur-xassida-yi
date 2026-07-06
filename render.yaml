@@ -5,7 +5,7 @@ services:
     repo: https://github.com/sadekhinformatique/keur-xassida-yi
     region: frankfurt
     plan: free
-    buildCommand: pip install -r backend/requirements.txt && cd backend && python manage.py migrate --run-syncdb
+    buildCommand: pip install -r backend/requirements.txt && cd backend && python manage.py migrate
     startCommand: cd backend && gunicorn config.wsgi --bind 0.0.0.0:$PORT --workers 4
     healthCheckPath: /api/auth/users/
     envVars:
@@ -13,6 +13,10 @@ services:
         generateValue: true
       - key: DJANGO_DEBUG
         value: false
+      - key: USE_DAPHNE
+        value: "true"
+      - key: RENDER
+        value: "true"
       - key: DJANGO_ALLOWED_HOSTS
         value: .onrender.com
       - key: SUPABASE_URL
@@ -24,21 +28,21 @@ services:
       - key: SUPABASE_SECRET_KEY
         sync: false
       - key: SUPABASE_DB_HOST
-        value: db.jfutcdemqkleebjicxpb.supabase.co
+        value: aws-0-eu-west-1.pooler.supabase.com
       - key: SUPABASE_DB_NAME
         value: postgres
       - key: SUPABASE_DB_USER
-        value: postgres
+        sync: false
       - key: SUPABASE_DB_PASSWORD
         sync: false
       - key: SUPABASE_DB_PORT
         value: "5432"
       - key: DB_HOST
-        value: db.jfutcdemqkleebjicxpb.supabase.co
+        value: aws-0-eu-west-1.pooler.supabase.com
       - key: DB_NAME
         value: postgres
       - key: DB_USER
-        value: postgres
+        sync: false
       - key: DB_PASSWORD
         sync: false
       - key: DB_SSLMODE

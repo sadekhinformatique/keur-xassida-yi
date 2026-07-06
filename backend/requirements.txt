@@ -19,3 +19,4 @@ redis>=5.2.1
 channels-redis>=4.2.1
 django-allauth>=65.3.1
 supabase>=2.31.0
+python-dotenv>=1.0.0

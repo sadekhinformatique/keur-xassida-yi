@@ -1,7 +1,12 @@
 #!/usr/bin/env python
-"""Django's command-line utility for administrative tasks."""
-import os
-import sys
+import os, sys
+from pathlib import Path
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).parent / '.env')
+except ImportError:
+    pass
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')

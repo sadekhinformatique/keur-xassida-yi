@@ -10,8 +10,9 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() == 'true'
 
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '*').split(',')
 
-INSTALLED_APPS = [
-    'daphne',
+DAPHNE_APPS = ['daphne', 'channels'] if os.environ.get('RENDER') or os.environ.get('USE_DAPHNE', '').lower() == 'true' else ['channels']
+
+INSTALLED_APPS = DAPHNE_APPS + [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -22,7 +23,6 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'django_filters',
-    'channels',
     'authentication.apps.AuthenticationConfig',
     'employees.apps.EmployeesConfig',
     'schedules.apps.SchedulesConfig',
